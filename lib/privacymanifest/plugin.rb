@@ -35,7 +35,7 @@ module Danger
             next if privacy_accessed_api.api.empty?
             index = lines.index line
             text = "The '#{privacy_accessed_api.api}' is the require reason api. Please check privacy manifest files."
-            warn(text, file: filename, line: index + 1) if line.include?(privacy_accessed_api.api)
+            warn(text, file: filename, line: index + 1) if line.gsub(/\.|\)/, ' ').split(/\s+/).include?(privacy_accessed_api.api)
           end
         end
       end
